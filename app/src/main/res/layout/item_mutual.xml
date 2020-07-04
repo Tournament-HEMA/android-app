@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mikhaellopez.circleview.CircleView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/circleView"
+    android:layout_width="50dp"
+    android:layout_height="100dp"
+    app:cv_color="@color/mutualColor"
+    app:cv_shadow="true"
+    app:cv_shadow_radius="10" />

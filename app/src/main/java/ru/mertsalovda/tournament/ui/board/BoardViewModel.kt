@@ -15,6 +15,10 @@ class BoardViewModel : ViewModel() {
     val bluePoints: MutableLiveData<Int> = _bluePoints
     private val _winner = MutableLiveData("")
     val winner: MutableLiveData<String> = _winner
+    private val _lose = MutableLiveData(false)
+    val lose: MutableLiveData<Boolean> = _lose
+    private val _mutual = MutableLiveData(0)
+    val mutual: MutableLiveData<Int> = _mutual
 
     fun plusRedPoints(points: Int) {
         val currentPoints = redPoints.value ?: 0
@@ -24,7 +28,7 @@ class BoardViewModel : ViewModel() {
             redPoints.postValue(currentPoints + points)
         }
 
-        if (currentPoints + points >= mRule.counterWin && currentPoints + points > bluePoints.value!!){
+        if (currentPoints + points >= mRule.counterWin && currentPoints + points > bluePoints.value!!) {
             winner.postValue("Красный победил")
         }
     }
@@ -37,8 +41,21 @@ class BoardViewModel : ViewModel() {
             bluePoints.postValue(currentPoints + points)
         }
 
-        if (currentPoints + points >= mRule.counterWin && currentPoints + points > redPoints.value!!){
+        if (currentPoints + points >= mRule.counterWin && currentPoints + points > redPoints.value!!) {
             winner.postValue("Синий победил")
+        }
+    }
+
+    fun addMutual(delta: Int) {
+        val currentMutual = mutual.value ?: 0
+        val newMutual = currentMutual + delta
+        when {
+            newMutual <= 0 -> mutual.postValue(0)
+            newMutual >= mRule.mutualLose -> {
+                mutual.postValue(mRule.mutualLose)
+                lose.postValue(true)
+            }
+            else -> mutual.postValue(newMutual)
         }
     }
 }

@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.arbelkilani.clock.enumeration.TimeCounterState
 import com.arbelkilani.clock.listener.TimeCounterListener
+import ru.mertsalovda.tournament.R
 import ru.mertsalovda.tournament.databinding.FrBoardBinding
 import java.util.concurrent.TimeUnit
 
@@ -85,6 +86,12 @@ class BoardFragment : Fragment() {
         mBinding.btnRedPlusTwo.setOnClickListener { mViewModel.plusRedPoints(2) }
         mBinding.btnRedMinusOne.setOnClickListener { mViewModel.plusRedPoints(-1) }
         mBinding.btnRedMinusTwo.setOnClickListener { mViewModel.plusRedPoints(-2) }
+
+        mBinding.btnMutualPlus.setOnClickListener { mViewModel.addMutual(1) }
+        mBinding.btnMutualPlus.setOnLongClickListener {
+            mViewModel.addMutual(-1)
+            true
+        }
     }
 
     private fun observeViewModel() {
@@ -100,6 +107,29 @@ class BoardFragment : Fragment() {
                 Toast.makeText(context, it, Toast.LENGTH_LONG).show()
             }
         })
+
+        mViewModel.lose.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                Toast.makeText(context, "Техническое поражение", Toast.LENGTH_LONG).show()
+            }
+        })
+
+        mViewModel.mutual.observe(viewLifecycleOwner, Observer {
+            mBinding.mutualContainer.removeAllViewsInLayout()
+            if (it > 0) {
+                for (i in 1..it) {
+                    val view =
+                        LayoutInflater.from(context)
+                            .inflate(R.layout.item_mutual, mBinding.root, false)
+                    mBinding.mutualContainer.addView(view)
+                }
+                Toast.makeText(context, "$it", Toast.LENGTH_LONG).show()
+            }
+        })
+    }
+
+    private fun addMutualOnLayout(count: Int) {
+
     }
 
     companion object {
