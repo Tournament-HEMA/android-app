@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -28,7 +27,8 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -38,14 +38,15 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/tvBlueCount"
         style="@style/TextViewCountStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="10"
+        android:text="@string/zero"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -57,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Сидоров Сергей"
+        tools:text="Сидоров Сергей"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/imageView2" />
@@ -68,7 +69,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="Клуб 2"
+        tools:text="Клуб 2"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline" />
@@ -79,7 +80,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Иванов Иван"
+        tools:text="Иванов Иван"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView" />
@@ -90,7 +91,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="Клуб 1"
+        tools:text="Клуб 1"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent" />
@@ -100,7 +101,7 @@
         style="@style/TextViewCountStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="10"
+        android:text="@string/zero"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
@@ -126,7 +127,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnMutual"
+        app:layout_constraintTop_toBottomOf="@+id/btnMutualPlus"
         app:progress_color="@color/colorPrimaryDark"
         app:show_border="true"
         app:show_progress="true" />
@@ -143,7 +144,7 @@
         style="@style/ButtonRedMinusCountStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="-1"
+        android:text="@string/minus1"
         android:textColor="@android:color/darker_gray"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
@@ -154,7 +155,7 @@
         style="@style/ButtonRedPlusCountStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="+2"
+        android:text="@string/plus2"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/btnRedPlusOne" />
@@ -164,7 +165,7 @@
         style="@style/ButtonRedMinusCountStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="-2"
+        android:text="@string/minus2"
         android:textColor="@android:color/darker_gray"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
@@ -175,7 +176,7 @@
         style="@style/ButtonRedPlusCountStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="+1"
+        android:text="@string/plus1"
         android:textColor="@android:color/holo_red_light"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -193,7 +194,7 @@
         style="@style/ButtonBluePlusCountStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="+1"
+        android:text="@string/plus1"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
@@ -203,7 +204,7 @@
         style="@style/ButtonBluePlusCountStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="+2"
+        android:text="@string/plus2"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/btnBluePlusOne" />
@@ -213,7 +214,7 @@
         style="@style/ButtonBlueMinusCountStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="-1"
+        android:text="@string/minus1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toBottomOf="@+id/guideline2" />
@@ -223,21 +224,20 @@
         style="@style/ButtonBlueMinusCountStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="-2"
+        android:text="@string/minus2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toBottomOf="@+id/btnBlueMinusOne" />
 
     <Button
-        style="@style/ButtonMutualStyle"
         android:id="@+id/btnMutualPlus"
+        style="@style/ButtonMutualStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Обоюдное"
+        android:text="@string/mutual"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnRedPlusTwo" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
