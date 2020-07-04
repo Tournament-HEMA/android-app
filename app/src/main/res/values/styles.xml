@@ -1,10 +1,63 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="TextViewCountStyle" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">120sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="TextViewNameStyle" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="TextViewClubStyle" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="RedWarriorImageViewStyle">
+        <item name="android:alpha">0.7</item>
+        <item name="android:background">@android:color/holo_red_light</item>
+    </style>
+
+    <style name="BlueWarriorImageViewStyle">
+        <item name="android:alpha">0.7</item>
+        <item name="android:background">@android:color/holo_blue_light</item>
+    </style>
+
+    <style name="ButtonCountStyle" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ButtonRedPlusCountStyle" parent="ButtonCountStyle">
+        <item name="android:textColor">@android:color/holo_red_light</item>
+    </style>
+
+    <style name="ButtonRedMinusCountStyle" parent="ButtonCountStyle">
+        <item name="android:textColor">@android:color/darker_gray</item>
+    </style>
+
+    <style name="ButtonBluePlusCountStyle" parent="ButtonCountStyle">
+        <item name="android:textColor">@android:color/holo_blue_light</item>
+    </style>
+
+    <style name="ButtonBlueMinusCountStyle" parent="ButtonCountStyle">
+        <item name="android:textColor">@android:color/darker_gray</item>
+    </style>
+
+    <style name="ButtonMutualStyle" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textColor">@android:color/holo_orange_dark</item>
     </style>
 
 </resources>
