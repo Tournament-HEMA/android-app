@@ -138,21 +138,19 @@ class BoardFragment : Fragment() {
             }
         })
 
-        mViewModel.mutual.observe(viewLifecycleOwner, Observer {
-            mBinding.mutualContainer.removeAllViewsInLayout()
-            if (it > 0) {
-                for (i in 1..it) {
-                    val view =
-                        LayoutInflater.from(context)
-                            .inflate(R.layout.item_mutual, mBinding.root, false)
-                    mBinding.mutualContainer.addView(view)
-                }
-            }
-        })
+        mViewModel.mutual.observe(viewLifecycleOwner, Observer { addMutualOnLayout(it) })
     }
 
     private fun addMutualOnLayout(count: Int) {
-
+        mBinding.mutualContainer.removeAllViewsInLayout()
+        if (count > 0) {
+            for (i in 1..count) {
+                val view =
+                    LayoutInflater.from(context)
+                        .inflate(R.layout.item_mutual, mBinding.root, false)
+                mBinding.mutualContainer.addView(view)
+            }
+        }
     }
 
     companion object {
