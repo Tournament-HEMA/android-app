@@ -1,6 +1,8 @@
 package ru.mertsalovda.tournament.ui.board
 
 import android.content.Context
+import android.media.AudioManager
+import android.media.SoundPool
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,9 +17,10 @@ import ru.mertsalovda.tournament.R
 import ru.mertsalovda.tournament.databinding.FrBoardBinding
 import java.util.concurrent.TimeUnit
 
-
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+
+private const val SOUND = R.raw.svist2
 
 class BoardFragment : Fragment() {
     // TODO: Rename and change types of parameters
@@ -26,6 +29,10 @@ class BoardFragment : Fragment() {
 
     private lateinit var mBinding: FrBoardBinding
     private lateinit var mViewModel: BoardViewModel
+
+    private lateinit var mSoundPool: SoundPool
+    private val mSoundId = 1
+    private var mStreamId: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,9 +52,11 @@ class BoardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        initSoundPool()
+
         mBinding = FrBoardBinding.inflate(inflater)
 
-        val time = TimeUnit.SECONDS.toMillis(10)
+        val time = TimeUnit.SECONDS.toMillis(120)
         mBinding.timer.apply {
             runTimeCounter(time)
             pauseTimeCounter()
@@ -66,14 +75,19 @@ class BoardFragment : Fragment() {
         return mBinding.root
     }
 
+    private fun initSoundPool() {
+        mSoundPool = SoundPool(4, AudioManager.STREAM_MUSIC, 100)
+        mSoundPool.load(context, SOUND, 1)
+    }
+
     private fun addListeners() {
         mBinding.timer.setTimeCounterListener(object : TimeCounterListener {
             override fun onTimeCounterCompleted() {
-                Toast.makeText(context, "END", Toast.LENGTH_LONG).show()
+                playSound()
             }
 
             override fun onTimeCounterStateChanged(timeCounterState: TimeCounterState) {
-                Toast.makeText(context, timeCounterState.name, Toast.LENGTH_LONG).show()
+                playSound()
             }
         })
 
@@ -92,6 +106,16 @@ class BoardFragment : Fragment() {
             mViewModel.addMutual(-1)
             true
         }
+    }
+
+    private fun playSound() {
+        val leftVolume = 1f
+        val rightVolume = 1f
+        val priority = 1
+        val loop = 0
+        val normalPlaybackRate = 1f
+        mStreamId =
+            mSoundPool.play(mSoundId, leftVolume, rightVolume, priority, loop, normalPlaybackRate)
     }
 
     private fun observeViewModel() {
@@ -123,7 +147,6 @@ class BoardFragment : Fragment() {
                             .inflate(R.layout.item_mutual, mBinding.root, false)
                     mBinding.mutualContainer.addView(view)
                 }
-                Toast.makeText(context, "$it", Toast.LENGTH_LONG).show()
             }
         })
     }
