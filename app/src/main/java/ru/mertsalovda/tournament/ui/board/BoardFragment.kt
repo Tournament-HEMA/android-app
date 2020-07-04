@@ -22,6 +22,8 @@ private const val ARG_PARAM2 = "param2"
 
 private const val SOUND = R.raw.svist2
 
+private val DURATION = TimeUnit.SECONDS.toMillis(120)
+
 class BoardFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -33,6 +35,7 @@ class BoardFragment : Fragment() {
     private lateinit var mSoundPool: SoundPool
     private val mSoundId = 1
     private var mStreamId: Int = -1
+    private var mute = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,24 +54,10 @@ class BoardFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        initSoundPool()
-
         mBinding = FrBoardBinding.inflate(inflater)
 
-        val time = TimeUnit.SECONDS.toMillis(120)
-        mBinding.timer.apply {
-            runTimeCounter(time)
-            pauseTimeCounter()
-        }
-        mBinding.timer.setOnClickListener {
-            when (mBinding.timer.timeCounterState) {
-                TimeCounterState.stopped -> mBinding.timer.runTimeCounter(time)
-                TimeCounterState.paused -> mBinding.timer.resumeTimeCounter()
-                TimeCounterState.running -> mBinding.timer.pauseTimeCounter()
-            }
-        }
-
+        initSoundPool()
+        initTimer()
         addListeners()
         observeViewModel()
 
@@ -81,6 +70,17 @@ class BoardFragment : Fragment() {
     }
 
     private fun addListeners() {
+        mBinding.timer.setOnClickListener {
+            when (mBinding.timer.timeCounterState) {
+                TimeCounterState.stopped -> mBinding.timer.runTimeCounter(DURATION)
+                TimeCounterState.paused -> mBinding.timer.resumeTimeCounter()
+                TimeCounterState.running -> mBinding.timer.pauseTimeCounter()
+            }
+        }
+        mBinding.timer.setOnLongClickListener {
+            initTimer()
+            true
+        }
         mBinding.timer.setTimeCounterListener(object : TimeCounterListener {
             override fun onTimeCounterCompleted() {
                 playSound()
@@ -108,14 +108,32 @@ class BoardFragment : Fragment() {
         }
     }
 
+    private fun initTimer() {
+        mute = true
+        mBinding.timer.apply {
+            runTimeCounter(DURATION)
+            pauseTimeCounter()
+        }
+        mute = false
+    }
+
     private fun playSound() {
         val leftVolume = 1f
         val rightVolume = 1f
         val priority = 1
         val loop = 0
         val normalPlaybackRate = 1f
-        mStreamId =
-            mSoundPool.play(mSoundId, leftVolume, rightVolume, priority, loop, normalPlaybackRate)
+        if (!mute) {
+            mStreamId =
+                mSoundPool.play(
+                    mSoundId,
+                    leftVolume,
+                    rightVolume,
+                    priority,
+                    loop,
+                    normalPlaybackRate
+                )
+        }
     }
 
     private fun observeViewModel() {
