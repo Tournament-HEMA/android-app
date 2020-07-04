@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/boardFragment"
-        android:name="ru.mertsalovda.tournament.ui.BoardFragment"
+        android:name="ru.mertsalovda.tournament.ui.board.BoardFragment"
         android:label="BoardFragment" />
 </navigation>
